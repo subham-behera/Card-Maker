@@ -1,0 +1,477 @@
+import React from 'react';
+import { 
+  Heart, MessageCircle, Send, Bookmark, MoreHorizontal,
+  QrCode, Mail, Globe, MapPin, Award, Shield, Swords
+} from 'lucide-react';
+
+// === 1. MAGIC: THE GATHERING (MTG) CARD ===
+export function MtgCard({ data }) {
+  const getThemeStyles = () => {
+    switch (data.themeId) {
+      case 'mtg-red': return { bg: 'bg-[#5c2d1b]', text: 'text-stone-100', border: 'border-[#3a190f]', mana: '🔥' };
+      case 'mtg-blue': return { bg: 'bg-[#2d4b68]', text: 'text-stone-100', border: 'border-[#1a2d3f]', mana: '💧' };
+      case 'mtg-green': return { bg: 'bg-[#2e503b]', text: 'text-stone-100', border: 'border-[#1b3123]', mana: '🌿' };
+      case 'mtg-black': return { bg: 'bg-[#3e3c3f]', text: 'text-stone-100', border: 'border-[#242224]', mana: '💀' };
+      default: return { bg: 'bg-[#5c544d]', text: 'text-stone-100', border: 'border-[#3c3631]', mana: '☀️' };
+    }
+  };
+  const theme = getThemeStyles();
+  
+  return (
+    <div 
+      className={`w-[280px] h-[390px] rounded-[16px] p-3 border-[4px] flex flex-col justify-between select-none ${theme.bg} ${theme.border} text-stone-100`}
+    >
+      <div className="border border-black/40 rounded-lg p-2 h-full flex flex-col justify-between bg-stone-900/10">
+        {/* Title & Mana */}
+        <div className="flex justify-between items-center bg-stone-100/10 border border-white/10 rounded px-2 py-0.5 shadow-sm">
+          <span className="font-serif font-black text-xs uppercase tracking-wide">{data.name || 'Creature'}</span>
+          <span className="text-xs">{theme.mana} {theme.mana}</span>
+        </div>
+
+        {/* Art Window */}
+        <div className="w-full h-[155px] border-2 border-stone-800 rounded overflow-hidden my-1 bg-stone-950 flex items-center justify-center shadow-inner relative">
+          {data.avatar ? (
+            <img
+              src={data.avatar}
+              alt={data.name}
+              className="w-full h-full object-cover"
+              style={{
+                transform: `scale(${data.avatarScale || 1.0}) translate(${(data.avatarX || 0)}px, ${(data.avatarY || 0)}px)`,
+                filter: data.avatarFilter === 'grayscale' ? 'grayscale(100%)' : 'none'
+              }}
+            />
+          ) : (
+            <span className="text-stone-500 text-xs">Artwork</span>
+          )}
+        </div>
+
+        {/* Type Line */}
+        <div className="bg-stone-100/10 border border-white/10 rounded px-2 py-0.5 text-[9px] font-bold tracking-wide italic text-left shadow-sm">
+          {data.species || 'Legendary Creature — Dragon'}
+        </div>
+
+        {/* Text Box */}
+        <div className="flex-1 border border-black/20 rounded p-2 text-stone-800 text-[9.5px] leading-tight font-medium overflow-hidden my-1 bg-[#ede8df] text-left">
+          <p className="font-serif italic opacity-90">{data.description || 'Rules & abilities description.'}</p>
+        </div>
+
+        {/* Power/Toughness */}
+        <div className="flex justify-end">
+          <span className="bg-stone-100/15 border border-white/10 rounded px-2.5 py-0.5 text-[11px] font-black font-mono tracking-wider shadow-sm">
+            {data.atk || '5'} / {data.def || '5'}
+          </span>
+        </div>
+      </div>
+    </div>
+  );
+}
+
+// === 2. STEAM ACHIEVEMENT CARD ===
+export function SteamCard({ data }) {
+  return (
+    <div className="w-[280px] h-[390px] bg-[#1b2838] border-2 border-[#101822] rounded-[12px] p-5 flex flex-col justify-between select-none text-[#c7d5e0]">
+      <div className="text-left">
+        <span className="text-[8px] font-mono tracking-widest text-[#66c0f4] uppercase font-bold">STEAM ACHIEVEMENT</span>
+        <h4 className="text-[10px] font-bold text-white uppercase truncate mt-0.5">{data.album || 'Game Title'}</h4>
+      </div>
+
+      {/* Rarity & Icon Badge */}
+      <div className="my-4 flex flex-col items-center justify-center">
+        <div className="w-24 h-24 rounded-2xl bg-gradient-to-tr from-amber-600/20 via-yellow-500/30 to-amber-400/20 border-2 border-yellow-500/50 flex items-center justify-center shadow-lg relative p-1 group-hover:scale-105 transition-transform">
+          <div className="w-full h-full rounded-xl overflow-hidden bg-slate-900">
+            {data.avatar ? (
+              <img
+                src={data.avatar}
+                alt={data.name}
+                className="w-full h-full object-cover"
+                style={{
+                  transform: `scale(${data.avatarScale || 1.0}) translate(${(data.avatarX || 0)}px, ${(data.avatarY || 0)}px)`,
+                  filter: data.avatarFilter === 'grayscale' ? 'grayscale(100%)' : 'none'
+                }}
+              />
+            ) : (
+              <Award size={32} className="text-yellow-500" />
+            )}
+          </div>
+        </div>
+        <span className="text-[9px] font-bold text-yellow-400 uppercase tracking-widest mt-3 animate-pulse">
+          🏆 RARE ACHIEVEMENT
+        </span>
+      </div>
+
+      {/* Details Box */}
+      <div className="text-center space-y-1">
+        <h3 className="text-sm font-black text-white uppercase tracking-tight">{data.name || 'Achievement'}</h3>
+        <p className="text-[9.5px] text-[#8f98a0] leading-tight font-medium max-h-[40px] overflow-hidden">
+          {data.description || 'Description details of game achievement.'}
+        </p>
+      </div>
+
+      {/* Rarity stats */}
+      <div className="border-t border-[#2a475e]/30 pt-3 flex justify-between text-[9px] font-mono text-slate-400">
+        <span>GLOBAL UNLOCKS</span>
+        <span className="text-[#66c0f4] font-bold">{data.progress || '1.2%'}</span>
+      </div>
+    </div>
+  );
+}
+
+// === 3. INSTAGRAM POST CARD ===
+export function InstagramCard({ data }) {
+  return (
+    <div className="w-[280px] h-[390px] bg-white border border-slate-200 rounded-2xl flex flex-col justify-between select-none overflow-hidden text-slate-800">
+      {/* Header */}
+      <div className="flex items-center justify-between px-3 py-2 border-b border-slate-100">
+        <div className="flex items-center gap-2">
+          <div className="w-6 h-6 rounded-full bg-slate-200 overflow-hidden border border-slate-100 flex items-center justify-center text-[9px]">
+            📸
+          </div>
+          <div className="text-left leading-none">
+            <span className="text-[10px] font-extrabold text-slate-900 tracking-tight block">
+              {data.artist || 'user.profile'}
+            </span>
+            <span className="text-[8px] text-slate-400 font-semibold">{data.country || 'Location'}</span>
+          </div>
+        </div>
+        <MoreHorizontal size={14} className="text-slate-400" />
+      </div>
+
+      {/* Square Post Media */}
+      <div className="w-full aspect-square max-h-[175px] bg-slate-50 flex items-center justify-center overflow-hidden border-b border-slate-50">
+        {data.avatar ? (
+          <img
+            src={data.avatar}
+            alt={data.name}
+            className="w-full h-full object-cover"
+            style={{
+              transform: `scale(${data.avatarScale || 1.0}) translate(${(data.avatarX || 0)}px, ${(data.avatarY || 0)}px)`,
+              filter: data.avatarFilter === 'grayscale' ? 'grayscale(100%)' : 'none'
+            }}
+          />
+        ) : (
+          <span className="text-slate-400 text-xs">No Photo</span>
+        )}
+      </div>
+
+      {/* Action Icons */}
+      <div className="flex items-center justify-between px-3 py-1.5">
+        <div className="flex items-center gap-3">
+          <Heart size={16} className="text-slate-800 hover:text-red-500 cursor-pointer" />
+          <MessageCircle size={16} className="text-slate-800 cursor-pointer" />
+          <Send size={15} className="text-slate-800 cursor-pointer" />
+        </div>
+        <Bookmark size={15} className="text-slate-800 cursor-pointer" />
+      </div>
+
+      {/* Caption & Comments */}
+      <div className="px-3 pb-3 text-left flex-1 flex flex-col justify-end space-y-1">
+        <p className="text-[9.5px] font-extrabold text-slate-900 leading-none">
+          Liked by 1,402 others
+        </p>
+        <p className="text-[10px] text-slate-700 leading-tight">
+          <span className="font-extrabold text-slate-900 mr-1.5">{data.artist || 'user'}</span>
+          {data.description || 'No caption configured.'}
+        </p>
+        <span className="text-[8px] text-slate-400 font-bold block uppercase mt-1">
+          2 hours ago
+        </span>
+      </div>
+    </div>
+  );
+}
+
+// === 4. POLAROID SNAPSHOT CARD ===
+export function PolaroidCard({ data }) {
+  return (
+    <div className="w-[280px] h-[390px] bg-[#fbfaf6] border border-stone-200 shadow-md p-4 pb-8 flex flex-col justify-between select-none text-stone-800 rounded-sm">
+      {/* Square Polaroid Photo Block */}
+      <div className="w-full aspect-square max-h-[220px] bg-[#1a1816] overflow-hidden p-2 shadow-inner border border-stone-300 flex items-center justify-center">
+        {data.avatar ? (
+          <img
+            src={data.avatar}
+            alt={data.name}
+            className="w-full h-full object-cover filter contrast-[110%] saturate-[90%] brightness-[105%]"
+            style={{
+              transform: `scale(${data.avatarScale || 1.0}) translate(${(data.avatarX || 0)}px, ${(data.avatarY || 0)}px)`,
+              filter: data.avatarFilter === 'grayscale' ? 'grayscale(100%)' : 'none'
+            }}
+          />
+        ) : (
+          <span className="text-stone-600 text-xs">Snap Photo</span>
+        )}
+      </div>
+
+      {/* Polaroid Caption margin */}
+      <div className="text-center pt-4 flex flex-col items-center justify-center flex-1">
+        <h3 className="font-serif text-[18px] font-bold tracking-tight text-slate-800 leading-none" style={{ fontFamily: 'Georgia, serif' }}>
+          {data.name || 'Polaroid Card'}
+        </h3>
+        <p className="text-[10px] text-stone-500 tracking-wide mt-1.5 font-bold uppercase">
+          {data.duration || 'June 2026'}
+        </p>
+      </div>
+    </div>
+  );
+}
+
+// === 5. DIGITAL BUSINESS CARD ===
+export function BusinessCard({ data }) {
+  return (
+    <div className="w-[280px] h-[390px] bg-slate-900 border border-slate-800 rounded-[20px] p-5 flex flex-col justify-between select-none text-slate-100 relative overflow-hidden">
+      {/* Abstract Design shapes */}
+      <div className="absolute top-0 right-0 w-24 h-24 bg-gradient-to-br from-indigo-500/20 to-purple-500/20 rounded-full blur-xl pointer-events-none" />
+
+      {/* Header Profile Info */}
+      <div className="flex items-start justify-between">
+        <div className="text-left space-y-1">
+          <span className="text-[8px] font-black uppercase text-indigo-400 tracking-widest">DIGITAL PROFILE</span>
+          <h2 className="text-base font-black tracking-tight leading-none uppercase">{data.name || 'CARD HOLDER'}</h2>
+          <p className="text-[10px] font-bold text-slate-400">{data.subtitle || 'Role Title'}</p>
+        </div>
+        <div className="w-12 h-12 rounded-full overflow-hidden border border-slate-700 bg-slate-800 shadow-sm p-0.5">
+          <div className="w-full h-full rounded-full overflow-hidden bg-slate-200">
+            {data.avatar && (
+              <img src={data.avatar} className="w-full h-full object-cover" alt="" />
+            )}
+          </div>
+        </div>
+      </div>
+
+      {/* QR Code section */}
+      <div className="flex flex-col items-center justify-center my-4">
+        <div className="p-3 bg-white border border-slate-700 rounded-xl shadow-md flex items-center justify-center">
+          <QrCode size={90} className="text-slate-900" />
+        </div>
+        <span className="text-[8px] font-bold tracking-widest text-slate-500 mt-2 uppercase">
+          SCAN TO CONNECT
+        </span>
+      </div>
+
+      {/* Footer Info details */}
+      <div className="border-t border-slate-800 pt-3 space-y-1.5 text-left text-[9.5px] text-slate-400 font-semibold">
+        <div className="flex items-center gap-2">
+          <Mail size={11} className="text-indigo-400" />
+          <span>{data.email || 'info@company.com'}</span>
+        </div>
+        <div className="flex items-center gap-2">
+          <Globe size={11} className="text-indigo-400" />
+          <span>{data.company || 'www.company.com'}</span>
+        </div>
+      </div>
+    </div>
+  );
+}
+
+// === 6. PREMIUM METAL CREDIT CARD ===
+export function CreditCard({ data }) {
+  return (
+    <div className="w-[280px] h-[390px] bg-gradient-to-tr from-slate-950 via-slate-900 to-slate-950 border border-slate-800/80 rounded-[20px] p-6 flex flex-col justify-between select-none text-slate-100 relative overflow-hidden">
+      {/* Diagonal metallic shine lines */}
+      <div className="absolute inset-0 bg-[linear-gradient(115deg,transparent_45%,rgba(255,255,255,0.05)_50%,transparent_55%)] pointer-events-none" />
+
+      {/* Header brand */}
+      <div className="flex items-center justify-between">
+        <span className="text-[10px] font-black uppercase tracking-widest text-amber-500">AETHER CAPITAL</span>
+        <span className="text-[8px] font-mono text-slate-500 font-bold">METAL PLATINUM</span>
+      </div>
+
+      {/* SIM Chip & NFC */}
+      <div className="flex items-center justify-between pt-4">
+        <div className="w-10 h-7 bg-amber-500/25 border border-amber-500/40 rounded-md shadow-inner flex flex-wrap p-0.5 gap-0.5">
+          <div className="w-[8px] h-full bg-amber-500/30 rounded" />
+          <div className="w-[12px] h-full bg-amber-500/30 rounded" />
+          <div className="w-[8px] h-full bg-amber-500/30 rounded" />
+        </div>
+        <div className="text-[9px] font-mono text-slate-500 rotate-90 leading-none">NFC</div>
+      </div>
+
+      {/* Credit Card Number */}
+      <div className="text-left py-4">
+        <h3 className="text-sm font-bold font-mono tracking-[4px] text-amber-500/95 leading-none">
+          {data.cardNumber || '4712 9403 1827 9402'}
+        </h3>
+      </div>
+
+      {/* Details (Holder & Expiry) */}
+      <div className="flex justify-between items-end">
+        <div className="text-left space-y-1">
+          <span className="text-[7px] text-slate-500 uppercase tracking-widest leading-none block">CARD HOLDER</span>
+          <span className="text-[10px] font-bold uppercase tracking-wider block">{data.name || 'HOLDER NAME'}</span>
+        </div>
+        <div className="flex items-center gap-3">
+          <div className="text-right">
+            <span className="text-[7px] text-slate-500 uppercase tracking-widest leading-none block">EXPIRES</span>
+            <span className="text-[9px] font-bold font-mono block">{data.duration || '09/29'}</span>
+          </div>
+          <div className="w-7 h-7 rounded-full bg-slate-800 border border-slate-700 flex items-center justify-center text-xs">
+            🌐
+          </div>
+        </div>
+      </div>
+    </div>
+  );
+}
+
+// === 7. D&D CHARACTER CARD ===
+export function DndCard({ data }) {
+  return (
+    <div className="w-[280px] h-[390px] bg-[#f2e6d0] border-[5px] border-[#5c4a37] rounded-lg p-3.5 flex flex-col justify-between select-none text-[#3e2c1c] font-serif">
+      <div className="border border-[#8c6d4f] rounded p-2 h-full flex flex-col justify-between bg-[#fbf5e6]/50">
+        {/* Header Details */}
+        <div className="text-left border-b border-[#8c6d4f]/30 pb-1.5 flex justify-between items-start">
+          <div>
+            <h3 className="text-sm font-black uppercase tracking-tight leading-none text-[#2b1f14]">{data.name || 'DND CHARACTER'}</h3>
+            <span className="text-[8px] uppercase tracking-wide opacity-80 mt-0.5 block">{data.species || 'Human Paladin'}</span>
+          </div>
+          <div className="bg-[#5c4a37] text-white text-[9px] font-bold px-2 py-0.5 rounded uppercase leading-none shadow-sm">
+            LVL {data.level || '5'}
+          </div>
+        </div>
+
+        {/* Character Miniature */}
+        <div className="w-full h-[120px] border-2 border-[#5c4a37] rounded overflow-hidden my-2 bg-stone-950 flex items-center justify-center relative shadow-inner">
+          {data.avatar ? (
+            <img src={data.avatar} className="w-full h-full object-cover" alt="" />
+          ) : (
+            <span className="text-stone-600 text-[10px]">Add Mini Photo</span>
+          )}
+        </div>
+
+        {/* Stats Grid */}
+        <div className="grid grid-cols-6 gap-1 border-y border-[#8c6d4f]/30 py-2 my-1.5 text-center">
+          {[
+            { label: 'STR', val: '16' },
+            { label: 'DEX', val: '12' },
+            { label: 'CON', val: '14' },
+            { label: 'INT', val: '10' },
+            { label: 'WIS', val: '13' },
+            { label: 'CHA', val: '15' }
+          ].map((stat, idx) => (
+            <div key={idx} className="flex flex-col bg-[#ede2c8] p-0.5 rounded border border-[#c1ad8b]">
+              <span className="text-[7px] font-bold font-sans opacity-70 leading-none">{stat.label}</span>
+              <span className="text-[10px] font-black leading-none mt-0.5">{stat.val}</span>
+            </div>
+          ))}
+        </div>
+
+        {/* DND Attributes details */}
+        <div className="grid grid-cols-3 gap-2 text-[9px] text-[#2b1f14] font-semibold text-left">
+          <div className="flex items-center gap-1">
+            <Swords size={11} className="text-[#8c6d4f]" />
+            <span>AC: {data.rating || '18'}</span>
+          </div>
+          <div className="flex items-center gap-1">
+            <Shield size={11} className="text-[#8c6d4f]" />
+            <span>HP: {data.hp || '42'}</span>
+          </div>
+          <div className="flex items-center gap-1">
+            <Award size={11} className="text-[#8c6d4f]" />
+            <span>Speed: 30ft</span>
+          </div>
+        </div>
+      </div>
+    </div>
+  );
+}
+
+// === 8. RETRO ARCADE TICKET ===
+export function TicketCard({ data }) {
+  return (
+    <div className="w-[280px] h-[390px] bg-[#ff5252] border-[3px] border-[#2f2f2f] rounded-[16px] p-5 flex flex-col justify-between select-none text-[#2f2f2f] font-mono relative overflow-hidden">
+      {/* Ticket cutouts on edges */}
+      <div className="absolute top-[-10px] left-[-10px] w-6 h-6 rounded-full bg-slate-50 border border-[#2f2f2f]" />
+      <div className="absolute top-[-10px] right-[-10px] w-6 h-6 rounded-full bg-slate-50 border border-[#2f2f2f]" />
+      <div className="absolute bottom-[-10px] left-[-10px] w-6 h-6 rounded-full bg-slate-50 border border-[#2f2f2f]" />
+      <div className="absolute bottom-[-10px] right-[-10px] w-6 h-6 rounded-full bg-slate-50 border border-[#2f2f2f]" />
+
+      <div className="border border-dashed border-[#2f2f2f]/60 p-3 h-full flex flex-col justify-between">
+        {/* Ticket Brand header */}
+        <div className="text-center pb-2 border-b-2 border-[#2f2f2f] flex justify-between items-center text-[10px] font-black">
+          <span>TICKET NO.</span>
+          <span className="font-sans">★ ADMIT ONE ★</span>
+          <span>#7421</span>
+        </div>
+
+        {/* Arcade Details */}
+        <div className="text-center py-4 space-y-1 flex-1 flex flex-col items-center justify-center">
+          <h2 className="text-[17px] font-black leading-none uppercase tracking-widest">{data.name || 'ARCADE PLAY'}</h2>
+          <p className="text-[10px] font-extrabold uppercase bg-[#2f2f2f] text-white px-2 py-0.5 rounded shadow-sm">
+            {data.tag || 'TICKET PASS'}
+          </p>
+          
+          {/* Barcode representation */}
+          <div className="w-full flex items-center justify-center gap-0.5 h-10 mt-5 opacity-90">
+            {[2, 4, 1, 3, 2, 4, 1, 3, 4, 2, 1, 2, 3, 1, 4, 2, 3, 2, 1].map((w, i) => (
+              <div key={i} className="h-full bg-[#2f2f2f] rounded-sm" style={{ width: `${w}px` }} />
+            ))}
+          </div>
+        </div>
+
+        {/* Footer timestamp */}
+        <div className="border-t-2 border-[#2f2f2f] pt-3 text-[9px] font-bold text-center leading-none">
+          VALID FOR SINGLE ADMISSION • {data.duration || 'JUNE 2026'}
+        </div>
+      </div>
+    </div>
+  );
+}
+
+// === 9. CRYPTO NFT DISPLAY CARD ===
+export function CryptoCard({ data }) {
+  return (
+    <div className="w-[280px] h-[390px] bg-[#0c0f1a] border border-cyan-500/30 rounded-[24px] p-5 flex flex-col justify-between select-none text-slate-200 relative overflow-hidden">
+      {/* Background neon radial glow */}
+      <div className="absolute bottom-0 right-0 w-28 h-28 bg-cyan-500/10 rounded-full blur-2xl pointer-events-none" />
+
+      {/* Header NFT info */}
+      <div className="flex items-center justify-between pb-2 border-b border-white/5">
+        <div className="flex items-center gap-1.5">
+          <div className="w-1.5 h-1.5 rounded-full bg-cyan-400 animate-pulse" />
+          <span className="text-[10px] font-extrabold tracking-widest uppercase text-cyan-400 font-mono">
+            NFT TOKEN RENDER
+          </span>
+        </div>
+        <span className="text-[8px] font-mono text-slate-500 font-bold">#{data.rating || '7412'}</span>
+      </div>
+
+      {/* Art Snapshot window */}
+      <div className="w-full h-[155px] my-3 rounded-xl overflow-hidden border border-cyan-500/20 bg-cyan-950/20 flex items-center justify-center shadow-inner relative group-hover:border-cyan-400/50 transition-colors">
+        {data.avatar ? (
+          <img
+            src={data.avatar}
+            alt={data.name}
+            className="w-full h-full object-cover"
+            style={{
+              transform: `scale(${data.avatarScale || 1.0}) translate(${(data.avatarX || 0)}px, ${(data.avatarY || 0)}px)`,
+              filter: data.avatarFilter === 'grayscale' ? 'grayscale(100%)' : 'none'
+            }}
+          />
+        ) : (
+          <span className="text-cyan-500/50 text-xs">Collectibles</span>
+        )}
+      </div>
+
+      {/* Token Name details */}
+      <div className="text-left space-y-1">
+        <h3 className="text-sm font-black tracking-tight text-white leading-none uppercase">
+          {data.name || 'CYBER APES'}
+        </h3>
+        <p className="text-[9.5px] font-mono text-cyan-400 font-bold">
+          PRICE: {data.hp || '2.45'} ETH
+        </p>
+      </div>
+
+      {/* Sparkline Visualizer */}
+      <div className="w-full border-t border-white/5 pt-3 mt-1.5 flex justify-between items-center text-[9px] font-mono text-slate-500">
+        <span>MARKET PRICE</span>
+        <div className="flex items-center gap-2">
+          {/* Up arrow */}
+          <span className="text-emerald-500 font-bold">+14.2%</span>
+          <svg className="w-12 h-6 text-emerald-500" viewBox="0 0 50 20" fill="none" stroke="currentColor" strokeWidth="2">
+            <path d="M0 15 L10 12 L20 16 L30 8 L40 10 L50 2" strokeLinecap="round" strokeLinejoin="round" />
+          </svg>
+        </div>
+      </div>
+    </div>
+  );
+}
