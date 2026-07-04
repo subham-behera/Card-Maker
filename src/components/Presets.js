@@ -8,14 +8,9 @@ export const CARD_TYPES = {
   MUSIC: 'music',
   ESPORTS: 'esports',
   MTG: 'mtg',
-  STEAM: 'steam',
-  INSTAGRAM: 'instagram',
-  POLAROID: 'polaroid',
   BUSINESS: 'business',
   CREDIT: 'credit',
-  DND: 'dnd',
-  TICKET: 'ticket',
-  CRYPTO: 'crypto'
+  DND: 'dnd'
 };
 
 export const FUT_THEMES = [
@@ -473,49 +468,6 @@ export const PRESETS = {
     borderWidth: 3,
     glowIntensity: 50
   },
-  [CARD_TYPES.STEAM]: {
-    cardType: CARD_TYPES.STEAM,
-    themeId: 'default',
-    name: 'Master Duelist',
-    album: 'Yu-Gi-Oh! Master Duel',
-    description: 'Win 100 ranked duels against other players globally.',
-    progress: '1.2%',
-    avatar: 'https://images.unsplash.com/photo-1542751371-adc38448a05e?auto=format&fit=crop&q=80&w=400',
-    avatarScale: 1.0,
-    avatarX: 0,
-    avatarY: 0,
-    avatarFilter: 'none',
-    borderWidth: 2,
-    glowIntensity: 50
-  },
-  [CARD_TYPES.INSTAGRAM]: {
-    cardType: CARD_TYPES.INSTAGRAM,
-    themeId: 'default',
-    name: 'Post',
-    artist: 'traveller.alex',
-    country: 'Paris, France',
-    description: 'Exploring the romantic streets of Paris! 🥖✨ #travel #wanderlust',
-    avatar: 'https://images.unsplash.com/photo-1508700115892-45ecd05ae2ad?auto=format&fit=crop&q=80&w=400',
-    avatarScale: 1.0,
-    avatarX: 0,
-    avatarY: 0,
-    avatarFilter: 'none',
-    borderWidth: 1,
-    glowIntensity: 20
-  },
-  [CARD_TYPES.POLAROID]: {
-    cardType: CARD_TYPES.POLAROID,
-    themeId: 'default',
-    name: 'Summer Memories',
-    duration: 'June 2026',
-    avatar: 'https://images.unsplash.com/photo-1489945052260-4f21c52268b9?auto=format&fit=crop&q=80&w=400',
-    avatarScale: 1.05,
-    avatarX: 0,
-    avatarY: 0,
-    avatarFilter: 'none',
-    borderWidth: 1,
-    glowIntensity: 30
-  },
   [CARD_TYPES.BUSINESS]: {
     cardType: CARD_TYPES.BUSINESS,
     themeId: 'default',
@@ -561,32 +513,4 @@ export const PRESETS = {
     borderWidth: 3,
     glowIntensity: 40
   },
-  [CARD_TYPES.TICKET]: {
-    cardType: CARD_TYPES.TICKET,
-    themeId: 'default',
-    name: 'RETRO GAMESPASS',
-    tag: 'ARCADE ONE',
-    duration: 'JUNE 2026',
-    avatar: '',
-    avatarScale: 1.0,
-    avatarX: 0,
-    avatarY: 0,
-    avatarFilter: 'none',
-    borderWidth: 2,
-    glowIntensity: 40
-  },
-  [CARD_TYPES.CRYPTO]: {
-    cardType: CARD_TYPES.CRYPTO,
-    themeId: 'default',
-    name: 'CYBER APES NFT',
-    rating: '7412',
-    hp: '2.45',
-    avatar: 'https://images.unsplash.com/photo-1618005182384-a83a8bd57fbe?auto=format&fit=crop&q=80&w=400',
-    avatarScale: 1.0,
-    avatarX: 0,
-    avatarY: 0,
-    avatarFilter: 'none',
-    borderWidth: 1,
-    glowIntensity: 50
-  }
 };

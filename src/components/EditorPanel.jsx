@@ -179,22 +179,17 @@ export default function EditorPanel({
                   <option value="yugioh">Yu-Gi-Oh! TCG Card</option>
                   <option value="mtg">Magic: The Gathering</option>
                   <option value="esports">Valorant Profile Card</option>
-                  <option value="steam">Steam Achievement</option>
                 </optgroup>
-                <optgroup label="📸 SOCIAL & SHARING">
+                <optgroup label="🎵 MUSIC">
                   <option value="music">Spotify Music Player</option>
-                  <option value="instagram">Instagram Post Mockup</option>
-                  <option value="polaroid">Polaroid Retro Snapshot</option>
                 </optgroup>
                 <optgroup label="👔 PROFESSIONAL & BRANDING">
                   <option value="dev">Developer Tech Badge</option>
                   <option value="business">Digital Business QR Card</option>
                   <option value="credit">Premium Metal Credit Card</option>
                 </optgroup>
-                <optgroup label="🐉 ADVENTURE & OTHER">
+                <optgroup label="🐉 ADVENTURE">
                   <option value="dnd">D&D Character Card</option>
-                  <option value="ticket">Retro Arcade Ticket</option>
-                  <option value="crypto">Crypto NFT Display Card</option>
                 </optgroup>
               </select>
             </div>
@@ -1078,116 +1073,6 @@ export default function EditorPanel({
               </>
             )}
 
-            {/* Steam Achievement Layout Inputs */}
-            {currentType === CARD_TYPES.STEAM && (
-              <>
-                <div className="grid grid-cols-2 gap-2">
-                  <div className="space-y-1">
-                    <label className="text-[10px] font-black uppercase text-slate-400">Achievement Title</label>
-                    <input
-                      type="text"
-                      value={cardData.name}
-                      onChange={(e) => updateField('name', e.target.value)}
-                      className="w-full py-1.5 px-3 border border-slate-200 rounded-lg text-xs font-semibold focus:outline-none focus:ring-2 focus:ring-blue-500/20"
-                    />
-                  </div>
-                  <div className="space-y-1">
-                    <label className="text-[10px] font-black uppercase text-slate-400">Game Name</label>
-                    <input
-                      type="text"
-                      value={cardData.album || ''}
-                      onChange={(e) => updateField('album', e.target.value)}
-                      className="w-full py-1.5 px-3 border border-slate-200 rounded-lg text-xs font-semibold focus:outline-none focus:ring-2 focus:ring-blue-500/20"
-                    />
-                  </div>
-                </div>
-
-                <div className="space-y-1">
-                  <label className="text-[10px] font-black uppercase text-slate-400">Global Unlock %</label>
-                  <input
-                    type="text"
-                    placeholder="e.g. 1.2%"
-                    value={cardData.progress || ''}
-                    onChange={(e) => updateField('progress', e.target.value)}
-                    className="w-full py-1.5 px-3 border border-slate-200 rounded-lg text-xs font-semibold focus:outline-none focus:ring-2 focus:ring-blue-500/20"
-                  />
-                </div>
-
-                <div className="space-y-1">
-                  <label className="text-[10px] font-black uppercase text-slate-400">Achievement Description</label>
-                  <textarea
-                    rows={3}
-                    value={cardData.description || ''}
-                    onChange={(e) => updateField('description', e.target.value)}
-                    className="w-full py-1.5 px-3 border border-slate-200 rounded-lg text-xs font-semibold focus:outline-none focus:ring-2 focus:ring-blue-500/20 resize-none font-sans"
-                  />
-                </div>
-              </>
-            )}
-
-            {/* Instagram Layout Inputs */}
-            {currentType === CARD_TYPES.INSTAGRAM && (
-              <>
-                <div className="grid grid-cols-2 gap-2">
-                  <div className="space-y-1">
-                    <label className="text-[10px] font-black uppercase text-slate-400">Username</label>
-                    <input
-                      type="text"
-                      value={cardData.artist || ''}
-                      onChange={(e) => updateField('artist', e.target.value)}
-                      className="w-full py-1.5 px-3 border border-slate-200 rounded-lg text-xs font-semibold focus:outline-none focus:ring-2 focus:ring-blue-500/20"
-                    />
-                  </div>
-                  <div className="space-y-1">
-                    <label className="text-[10px] font-black uppercase text-slate-400">Location</label>
-                    <input
-                      type="text"
-                      value={cardData.country || ''}
-                      onChange={(e) => updateField('country', e.target.value)}
-                      className="w-full py-1.5 px-3 border border-slate-200 rounded-lg text-xs font-semibold focus:outline-none focus:ring-2 focus:ring-blue-500/20"
-                    />
-                  </div>
-                </div>
-
-                <div className="space-y-1">
-                  <label className="text-[10px] font-black uppercase text-slate-400">Post Caption</label>
-                  <textarea
-                    rows={3}
-                    value={cardData.description || ''}
-                    onChange={(e) => updateField('description', e.target.value)}
-                    className="w-full py-1.5 px-3 border border-slate-200 rounded-lg text-xs font-semibold focus:outline-none focus:ring-2 focus:ring-blue-500/20 resize-none font-sans"
-                  />
-                </div>
-              </>
-            )}
-
-            {/* Polaroid Layout Inputs */}
-            {currentType === CARD_TYPES.POLAROID && (
-              <>
-                <div className="grid grid-cols-2 gap-2">
-                  <div className="space-y-1">
-                    <label className="text-[10px] font-black uppercase text-slate-400">Title / Caption</label>
-                    <input
-                      type="text"
-                      value={cardData.name}
-                      onChange={(e) => updateField('name', e.target.value)}
-                      className="w-full py-1.5 px-3 border border-slate-200 rounded-lg text-xs font-semibold focus:outline-none focus:ring-2 focus:ring-blue-500/20"
-                    />
-                  </div>
-                  <div className="space-y-1">
-                    <label className="text-[10px] font-black uppercase text-slate-400">Date / Timestamp</label>
-                    <input
-                      type="text"
-                      value={cardData.duration || ''}
-                      onChange={(e) => updateField('duration', e.target.value)}
-                      className="w-full py-1.5 px-3 border border-slate-200 rounded-lg text-xs font-semibold focus:outline-none focus:ring-2 focus:ring-blue-500/20"
-                    />
-                  </div>
-                </div>
-              </>
-            )}
-
-            {/* Business Card Layout Inputs */}
             {currentType === CARD_TYPES.BUSINESS && (
               <>
                 <div className="grid grid-cols-2 gap-2">
@@ -1332,78 +1217,6 @@ export default function EditorPanel({
               </>
             )}
 
-            {/* Ticket Layout Inputs */}
-            {currentType === CARD_TYPES.TICKET && (
-              <>
-                <div className="grid grid-cols-2 gap-2">
-                  <div className="space-y-1">
-                    <label className="text-[10px] font-black uppercase text-slate-400">Ticket Title</label>
-                    <input
-                      type="text"
-                      value={cardData.name}
-                      onChange={(e) => updateField('name', e.target.value)}
-                      className="w-full py-1.5 px-3 border border-slate-200 rounded-lg text-xs font-semibold focus:outline-none focus:ring-2 focus:ring-blue-500/20"
-                    />
-                  </div>
-                  <div className="space-y-1">
-                    <label className="text-[10px] font-black uppercase text-slate-400">Pass Tag</label>
-                    <input
-                      type="text"
-                      value={cardData.tag || ''}
-                      onChange={(e) => updateField('tag', e.target.value)}
-                      className="w-full py-1.5 px-3 border border-slate-200 rounded-lg text-xs font-semibold focus:outline-none focus:ring-2 focus:ring-blue-500/20 text-center"
-                    />
-                  </div>
-                </div>
-
-                <div className="space-y-1">
-                  <label className="text-[10px] font-black uppercase text-slate-400">Validity Period / Timestamp</label>
-                  <input
-                    type="text"
-                    value={cardData.duration || ''}
-                    onChange={(e) => updateField('duration', e.target.value)}
-                    className="w-full py-1.5 px-3 border border-slate-200 rounded-lg text-xs font-semibold focus:outline-none focus:ring-2 focus:ring-blue-500/20"
-                  />
-                </div>
-              </>
-            )}
-
-            {/* Crypto Layout Inputs */}
-            {currentType === CARD_TYPES.CRYPTO && (
-              <>
-                <div className="grid grid-cols-3 gap-2">
-                  <div className="col-span-2 space-y-1">
-                    <label className="text-[10px] font-black uppercase text-slate-400">NFT Token Name</label>
-                    <input
-                      type="text"
-                      value={cardData.name}
-                      onChange={(e) => updateField('name', e.target.value)}
-                      className="w-full py-1.5 px-3 border border-slate-200 rounded-lg text-xs font-semibold focus:outline-none focus:ring-2 focus:ring-blue-500/20"
-                    />
-                  </div>
-                  <div className="space-y-1">
-                    <label className="text-[10px] font-black uppercase text-slate-400">Token ID (#)</label>
-                    <input
-                      type="text"
-                      value={cardData.rating || ''}
-                      onChange={(e) => updateField('rating', e.target.value)}
-                      className="w-full py-1.5 px-3 border border-slate-200 rounded-lg text-xs font-semibold focus:outline-none focus:ring-2 focus:ring-blue-500/20 text-center font-mono"
-                    />
-                  </div>
-                </div>
-
-                <div className="space-y-1">
-                  <label className="text-[10px] font-black uppercase text-slate-400">Price in ETH</label>
-                  <input
-                    type="text"
-                    placeholder="e.g. 2.45"
-                    value={cardData.hp || ''}
-                    onChange={(e) => updateField('hp', e.target.value)}
-                    className="w-full py-1.5 px-3 border border-slate-200 rounded-lg text-xs font-semibold focus:outline-none focus:ring-2 focus:ring-blue-500/20"
-                  />
-                </div>
-              </>
-            )}
           </div>
         )}
 

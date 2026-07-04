@@ -16,14 +16,9 @@ import MusicCard from './components/MusicCard';
 import EsportsCard from './components/EsportsCard';
 import { 
   MtgCard, 
-  SteamCard, 
-  InstagramCard, 
-  PolaroidCard, 
   BusinessCard, 
   CreditCard, 
-  DndCard, 
-  TicketCard, 
-  CryptoCard 
+  DndCard
 } from './components/ExtraCards';
 import EditorPanel from './components/EditorPanel';
 
@@ -56,22 +51,12 @@ const getCardGlowColor = (data) => {
       if (data.themeId === 'mtg-green') return '#34d399';
       if (data.themeId === 'mtg-black') return '#a78bfa';
       return '#fbbf24';
-    case CARD_TYPES.STEAM:
-      return '#66c0f4';
-    case CARD_TYPES.INSTAGRAM:
-      return '#e1306c';
-    case CARD_TYPES.POLAROID:
-      return '#94a3b8';
     case CARD_TYPES.BUSINESS:
       return '#818cf8';
     case CARD_TYPES.CREDIT:
       return '#f59e0b';
     case CARD_TYPES.DND:
       return '#b45309';
-    case CARD_TYPES.TICKET:
-      return '#ff5252';
-    case CARD_TYPES.CRYPTO:
-      return '#22d3ee';
     default:
       return '#10b981';
   }
@@ -128,15 +113,10 @@ export default function App() {
       } else if (prev.cardType === CARD_TYPES.MTG) {
         updated.atk = Math.floor(Math.random() * 9 + 1).toString();
         updated.def = Math.floor(Math.random() * 9 + 1).toString();
-      } else if (prev.cardType === CARD_TYPES.STEAM) {
-        updated.progress = (Math.random() * 15 + 0.1).toFixed(1) + '%';
       } else if (prev.cardType === CARD_TYPES.DND) {
         updated.level = Math.floor(Math.random() * 20 + 1);
         updated.hp = Math.floor(Math.random() * 90 + 10).toString();
         updated.rating = Math.floor(Math.random() * 12 + 10).toString();
-      } else if (prev.cardType === CARD_TYPES.CRYPTO) {
-        updated.hp = (Math.random() * 4.9 + 0.05).toFixed(2);
-        updated.rating = Math.floor(Math.random() * 9000 + 1000).toString();
       }
       return updated;
     });
@@ -206,22 +186,12 @@ export default function App() {
         return <EsportsCard data={cardData} />;
       case CARD_TYPES.MTG:
         return <MtgCard data={cardData} />;
-      case CARD_TYPES.STEAM:
-        return <SteamCard data={cardData} />;
-      case CARD_TYPES.INSTAGRAM:
-        return <InstagramCard data={cardData} />;
-      case CARD_TYPES.POLAROID:
-        return <PolaroidCard data={cardData} />;
       case CARD_TYPES.BUSINESS:
         return <BusinessCard data={cardData} />;
       case CARD_TYPES.CREDIT:
         return <CreditCard data={cardData} />;
       case CARD_TYPES.DND:
         return <DndCard data={cardData} />;
-      case CARD_TYPES.TICKET:
-        return <TicketCard data={cardData} />;
-      case CARD_TYPES.CRYPTO:
-        return <CryptoCard data={cardData} />;
       default:
         return null;
     }
